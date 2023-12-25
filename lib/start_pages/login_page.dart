@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _isLoading = false;
+  late String uuidCode;
 
   Future<void> _login() async {
     setState(() {
@@ -19,20 +21,30 @@ class _LoginPageState extends State<LoginPage> {
     });
     String userType = isLecturer ? 'lecturer' : 'student';
     final apiUrl =
-        'https://ams-production-7b32.up.railway.app/api/$userType-login/'; // Replace with your Django API endpoint
+        'https://ams-production-7b32.up.railway.app/api/$userType-login/';
 
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final storedUUID = prefs.getString('uuid');
+
       final response = await http.post(
         Uri.parse(apiUrl),
         body: {
           'username': usernameController.text.trim(),
           'password': passwordController.text.trim(),
+          'uuidcode':
+              storedUUID ?? '', // Use an empty string if storedUUID is null
         },
       );
 
       if (response.statusCode == 200 && userType == 'student') {
         final responseData = json.decode(response.body);
-        print('Login successful: $responseData');
+
+        // Store or retrieve UUID using shared preferences
+        if (storedUUID == null) {
+          // Store UUID if not already stored
+          prefs.setString('uuid', responseData['student']['UUID']);
+        }
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -42,10 +54,9 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         Navigator.pushNamed(context, '/firstpage',
-            arguments: responseData['id']);
+            arguments: responseData['student']['id']);
       } else if (response.statusCode == 200 && userType == 'lecturer') {
         final responseData = json.decode(response.body);
-        print('Login successful: $responseData');
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -58,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
             arguments: responseData['id']);
       } else {
         print('Login failed. Status code: ${response.statusCode}');
-        // Handle login failure
+
+        print(
+            'UUID mismatched. use your own device to login, Stored UUID: $storedUUID');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Login failed. Status code: ${response.statusCode}'),
@@ -68,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (error) {
       print('Error during login: $error');
-      // Handle network or other errors
     }
     setState(() {
       _isLoading = false;
