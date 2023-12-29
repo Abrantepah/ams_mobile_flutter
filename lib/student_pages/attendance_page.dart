@@ -80,6 +80,7 @@ class _AttendancePageState extends State<AttendancePage> {
           SnackBar(
             content: Text('Attendance marked successfully'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
           ),
         );
       } else {
@@ -90,6 +91,7 @@ class _AttendancePageState extends State<AttendancePage> {
           SnackBar(
             content: Text('Failed to mark attendance. Please try again.'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 1),
           ),
         );
       }
@@ -100,6 +102,7 @@ class _AttendancePageState extends State<AttendancePage> {
         SnackBar(
           content: Text('An error occurred. Please try again later.'),
           backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
         ),
       );
     }

@@ -53,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(
             content: Text('Login successful'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
           ),
         );
 
@@ -65,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(
             content: Text('Login successful'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
           ),
         );
 
@@ -79,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(
             content: Text('Login failed. $responseData'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
           ),
         );
       }

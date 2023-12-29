@@ -88,6 +88,7 @@ class _VerificationPageState extends State<VerificationPage> {
           SnackBar(
             content: Text('$responseData. Please try again.'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -97,8 +98,9 @@ class _VerificationPageState extends State<VerificationPage> {
       // Display an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('An error occurred. Please try again later.'),
+          content: Text('An error occurred. Please try again.'),
           backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
         ),
       );
     } finally {

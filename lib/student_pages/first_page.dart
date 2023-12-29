@@ -16,6 +16,7 @@ class _FirstPageState extends State<FirstPage> {
   var _selectedIndex = 0;
   late Future<Map<String, dynamic>> userData;
   late int userId;
+  bool doubleBackToExit = false;
 
   void _navigateButtonBar(int index) {
     setState(() {
@@ -47,42 +48,77 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<Map<String, dynamic>>(
-        future: userData,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final userData = snapshot.data;
+    return WillPopScope(
+      onWillPop: () async {
+        if (_selectedIndex != 0) {
+          // If not on the Home page, navigate to Home page
+          setState(() {
+            _selectedIndex = 0;
+          });
+          return false; // Do not exit the app
+        } else if (doubleBackToExit) {
+          // If already on Home page, exit the app
+          return true;
+        } else {
+          // Show a message
+          setState(() {
+            doubleBackToExit = true;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Press back again to logout'),
+              duration: Duration(seconds: 2),
+            ),
+          );
 
-            // Pass user data down to the pages
-            return _pages[_selectedIndex](userData!);
-          } else {
-            return Center(child: Text('No data available'));
-          }
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _navigateButtonBar,
-        selectedItemColor: Colors.green,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.border_all_rounded),
-            label: 'Attendance',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Permission',
-          ),
-        ],
+          // Reset the flag after 2 seconds
+          Future.delayed(Duration(seconds: 2), () {
+            setState(() {
+              doubleBackToExit = false;
+            });
+          });
+
+          // Return false to prevent the default back navigation
+          return false;
+        }
+      },
+      child: Scaffold(
+        body: FutureBuilder<Map<String, dynamic>>(
+          future: userData,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (snapshot.hasData) {
+              final userData = snapshot.data;
+
+              // Pass user data down to the pages
+              return _pages[_selectedIndex](userData!);
+            } else {
+              return Center(child: Text('No data available'));
+            }
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _navigateButtonBar,
+          selectedItemColor: Colors.green,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.border_all_rounded),
+              label: 'Attendance',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Permission',
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -111,6 +111,7 @@ class _PermissionPageState extends State<PermissionPage> {
           SnackBar(
             content: Text('Permission sent'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
           ),
         );
         verificationCodeController.clear();
@@ -122,6 +123,7 @@ class _PermissionPageState extends State<PermissionPage> {
           SnackBar(
             content: Text('Failed to send permission, please try again'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -133,6 +135,7 @@ class _PermissionPageState extends State<PermissionPage> {
         SnackBar(
           content: Text('Network issues, check and try again'),
           backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
         ),
       );
     }

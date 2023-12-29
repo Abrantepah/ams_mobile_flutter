@@ -82,6 +82,7 @@ class _GeneratePageState extends State<GeneratePage> {
             content: Text(
                 'could\'nt generate code. Please try again. ${response.statusCode}'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 2),
           ),
         );
       }
