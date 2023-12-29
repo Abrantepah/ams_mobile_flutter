@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Simulate a long-running task, such as loading data or initializing resources
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 2), () {
       // Navigate to the home screen or the desired screen after the splash screen
       Navigator.pushReplacement(
         context,

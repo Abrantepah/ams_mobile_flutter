@@ -37,13 +37,16 @@ class _LoginPageState extends State<LoginPage> {
         },
       );
 
+      print('stored UUID: $storedUUID');
+
       if (response.statusCode == 200 && userType == 'student') {
         final responseData = json.decode(response.body);
 
+        print('response data: $responseData');
         // Store or retrieve UUID using shared preferences
         if (storedUUID == null) {
           // Store UUID if not already stored
-          prefs.setString('uuid', responseData['student']['UUID']);
+          prefs.setString('uuid', responseData['UUID']);
         }
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -54,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         Navigator.pushNamed(context, '/firstpage',
-            arguments: responseData['student']['id']);
+            arguments: responseData['id']);
       } else if (response.statusCode == 200 && userType == 'lecturer') {
         final responseData = json.decode(response.body);
 
@@ -68,13 +71,13 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushNamed(context, '/secondpage',
             arguments: responseData['id']);
       } else {
-        print('Login failed. Status code: ${response.statusCode}');
+        final responseData = json.decode(response.body);
 
         print(
             'UUID mismatched. use your own device to login, Stored UUID: $storedUUID');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Login failed. Status code: ${response.statusCode}'),
+            content: Text('Login failed. $responseData'),
             backgroundColor: Colors.red,
           ),
         );
