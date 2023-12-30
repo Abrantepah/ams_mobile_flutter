@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key}) : super(key: key);
+  const SecondPage({super.key});
 
   @override
   _SecondPageState createState() => _SecondPageState();
@@ -52,7 +52,7 @@ class _SecondPageState extends State<SecondPage> {
         future: userData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
@@ -61,7 +61,7 @@ class _SecondPageState extends State<SecondPage> {
             // Pass user data down to the pages
             return _pages[_selectedIndex](userData!);
           } else {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           }
         },
       ),
@@ -69,7 +69,7 @@ class _SecondPageState extends State<SecondPage> {
         currentIndex: _selectedIndex,
         onTap: _navigateButtonBar,
         selectedItemColor: Colors.green,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

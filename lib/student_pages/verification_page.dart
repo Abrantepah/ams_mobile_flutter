@@ -8,7 +8,7 @@ import 'dart:async';
 class VerificationPage extends StatefulWidget {
   final Map<String, dynamic>? userData;
 
-  const VerificationPage({Key? key, this.userData}) : super(key: key);
+  const VerificationPage({super.key, this.userData});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -30,7 +30,7 @@ class _VerificationPageState extends State<VerificationPage> {
     studentId = widget.userData?['id'] ?? 0;
     _codeController = TextEditingController();
     _determinePosition();
-    Timer.periodic(Duration(seconds: 300), (timer) {
+    Timer.periodic(const Duration(seconds: 300), (timer) {
       _determinePosition();
     });
   }
@@ -88,7 +88,7 @@ class _VerificationPageState extends State<VerificationPage> {
           SnackBar(
             content: Text('$responseData. Please try again.'),
             backgroundColor: Colors.red,
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
           ),
         );
       }
@@ -97,7 +97,7 @@ class _VerificationPageState extends State<VerificationPage> {
       print('Error: $e');
       // Display an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('An error occurred. Please try again.'),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 2),
@@ -155,14 +155,14 @@ class _VerificationPageState extends State<VerificationPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Enter Verification Code',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Form(
                 child: Column(
                   children: [
@@ -181,10 +181,10 @@ class _VerificationPageState extends State<VerificationPage> {
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.green[500],
-                        padding: EdgeInsets.all(17),
+                        padding: const EdgeInsets.all(17),
                       ),
                       child: _isLoading
-                          ? CircularProgressIndicator(
+                          ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
                           : const Text(

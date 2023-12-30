@@ -12,7 +12,7 @@ class GeneratePage extends StatefulWidget {
   _GeneratePageState createState() => _GeneratePageState();
   final Map<String, dynamic>? userData;
 
-  GeneratePage({Key? key, this.userData}) : super(key: key);
+  const GeneratePage({super.key, this.userData});
 }
 
 class _GeneratePageState extends State<GeneratePage> {
@@ -186,7 +186,7 @@ class _GeneratePageState extends State<GeneratePage> {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              '$session',
+                              session,
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.grey,
@@ -207,8 +207,8 @@ class _GeneratePageState extends State<GeneratePage> {
                 },
                 items: courses
                     .map((course) => DropdownMenuItem(
-                          child: Text(course.name),
                           value: course.id.toString(),
+                          child: Text(course.name),
                         ))
                     .toList(),
                 decoration: InputDecoration(
@@ -225,7 +225,7 @@ class _GeneratePageState extends State<GeneratePage> {
               ElevatedButton(
                 onPressed: isButtonDisabled ? null : () => sendLocation(),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                 ),
                 child: _isLoading
                     ? CircularProgressIndicator(

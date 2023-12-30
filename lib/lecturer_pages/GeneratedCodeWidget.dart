@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class GeneratedCodeWidget extends StatelessWidget {
   final String generatedCode;
 
-  GeneratedCodeWidget({required this.generatedCode});
+  const GeneratedCodeWidget({super.key, required this.generatedCode});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
@@ -18,14 +18,14 @@ class GeneratedCodeWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 10,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             'Verification Code',
             style: TextStyle(
               fontSize: 24.0,
@@ -33,7 +33,7 @@ class GeneratedCodeWidget extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           Text(
             generatedCode,
             style: TextStyle(
@@ -42,8 +42,8 @@ class GeneratedCodeWidget extends StatelessWidget {
               color: Colors.green[600],
             ),
           ),
-          SizedBox(height: 20.0),
-          Text(
+          const SizedBox(height: 20.0),
+          const Text(
             'Please students should enter this code for verification purpose.',
             style: TextStyle(
               fontSize: 16.0,

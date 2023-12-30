@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   final Map<String, dynamic> userData;
 
-  HomePage({required this.userData});
+  const HomePage({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,13 @@ class HomePage extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage('lib/asset/logo.png'), // Update the path
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Welcome Back,',
                         style: TextStyle(
                           fontSize: 24,
@@ -56,15 +56,15 @@ class HomePage extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Remember,',
                         style: TextStyle(
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Text(
+                      const Text(
                         'THREE OR MORE',
                         style: TextStyle(
                           fontSize: 18,
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Text(
+                      const Text(
                         'unauthorized absences disqualify you from taking the course exams',
                         style: TextStyle(
                           fontSize: 16,

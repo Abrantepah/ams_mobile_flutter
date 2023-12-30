@@ -6,7 +6,7 @@ import 'package:ams_mobile/student_pages/permission_page.dart';
 import 'package:ams_mobile/student_pages/verification_page.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  const FirstPage({super.key});
 
   @override
   _FirstPageState createState() => _FirstPageState();
@@ -65,14 +65,14 @@ class _FirstPageState extends State<FirstPage> {
             doubleBackToExit = true;
           });
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Press back again to logout'),
               duration: Duration(seconds: 2),
             ),
           );
 
           // Reset the flag after 2 seconds
-          Future.delayed(Duration(seconds: 2), () {
+          Future.delayed(const Duration(seconds: 2), () {
             setState(() {
               doubleBackToExit = false;
             });
@@ -87,7 +87,7 @@ class _FirstPageState extends State<FirstPage> {
           future: userData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.hasData) {
@@ -96,7 +96,7 @@ class _FirstPageState extends State<FirstPage> {
               // Pass user data down to the pages
               return _pages[_selectedIndex](userData!);
             } else {
-              return Center(child: Text('No data available'));
+              return const Center(child: Text('No data available'));
             }
           },
         ),
@@ -104,7 +104,7 @@ class _FirstPageState extends State<FirstPage> {
           currentIndex: _selectedIndex,
           onTap: _navigateButtonBar,
           selectedItemColor: Colors.green,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',

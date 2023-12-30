@@ -4,7 +4,7 @@
     <application
         android:label="AMS App"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:enableOnBackInvokedCallback="true"> <!-- Move this line here -->
         <activity
             android:name=".MainActivity"

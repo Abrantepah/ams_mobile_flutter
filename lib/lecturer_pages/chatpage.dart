@@ -8,7 +8,7 @@ class PermissionTable extends StatefulWidget {
   _PermissionTableState createState() => _PermissionTableState();
   final Map<String, dynamic>? userData;
 
-  PermissionTable({Key? key, this.userData}) : super(key: key);
+  const PermissionTable({super.key, this.userData});
 }
 
 class _PermissionTableState extends State<PermissionTable> {
@@ -22,7 +22,7 @@ class _PermissionTableState extends State<PermissionTable> {
     lecturerId = widget.userData?['lecturer']['id'] ?? 0;
     fetchMessages();
     // Schedule the fetchMessages function to be called every 30 seconds
-    Timer.periodic(Duration(seconds: 3), (timer) {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
       fetchMessages();
     });
   }
@@ -132,10 +132,10 @@ class _PermissionTableState extends State<PermissionTable> {
           borderRadius: BorderRadius.circular(24.0),
           color: Colors.white,
         ),
-        margin: EdgeInsets.symmetric(vertical: 8.0),
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
         child: TextField(
           autofocus: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Search...',
             hintStyle: TextStyle(color: Colors.grey),
             prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -150,7 +150,7 @@ class _PermissionTableState extends State<PermissionTable> {
   }
 
   Widget _buildTitle() {
-    return Text(
+    return const Text(
       'Permission Request', // Customize the app bar title
       style: TextStyle(
         fontWeight: FontWeight.bold,
@@ -163,7 +163,7 @@ class _PermissionTableState extends State<PermissionTable> {
     if (_isSearching) {
       return [
         IconButton(
-          icon: Icon(Icons.close, color: Colors.white),
+          icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () {
             setState(() {
               _isSearching = false;
@@ -174,7 +174,7 @@ class _PermissionTableState extends State<PermissionTable> {
     } else {
       return [
         IconButton(
-          icon: Icon(Icons.search, color: Colors.white),
+          icon: const Icon(Icons.search, color: Colors.white),
           onPressed: () {
             setState(() {
               _isSearching = true;
@@ -182,7 +182,7 @@ class _PermissionTableState extends State<PermissionTable> {
           },
         ),
         IconButton(
-          icon: Icon(Icons.more_vert, color: Colors.white),
+          icon: const Icon(Icons.more_vert, color: Colors.white),
           onPressed: () {
             // Handle more options button click
           },
@@ -194,8 +194,8 @@ class _PermissionTableState extends State<PermissionTable> {
   Widget _buildSwipeBackground() {
     return Container(
       color: Colors.grey[300],
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Icon(Icons.thumb_down, color: Colors.red),
@@ -219,14 +219,14 @@ class _PermissionTableState extends State<PermissionTable> {
                 Navigator.pop(context);
                 handleStatus(permissionId, 'true');
               },
-              child: Text('Accept'),
+              child: const Text('Accept'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 handleStatus(permissionId, 'false');
               },
-              child: Text('Reject'),
+              child: const Text('Reject'),
             ),
           ],
         );
@@ -241,18 +241,18 @@ class ContactItem extends StatelessWidget {
   final VoidCallback? onTap;
 
   const ContactItem({
-    Key? key,
+    super.key,
     required this.sender,
     required this.index,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             CircleAvatar(
@@ -261,20 +261,20 @@ class ContactItem extends StatelessWidget {
               // You can add user profile images here
               // child: Icon(Icons.person, color: Colors.white),
             ),
-            SizedBox(width: 16.0),
+            const SizedBox(width: 16.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   sender,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
                   ),
                 ),
                 Text(
                   'Index: $index',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16.0,
                     color: Colors.grey,
                   ),

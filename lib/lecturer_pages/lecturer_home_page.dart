@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class LecturerHome extends StatelessWidget {
   final Map<String, dynamic> userData;
 
-  LecturerHome({required this.userData});
+  const LecturerHome({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {

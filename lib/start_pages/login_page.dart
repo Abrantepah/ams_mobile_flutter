@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -50,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         }
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Login successful'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
@@ -63,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
         final responseData = json.decode(response.body);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Login successful'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
@@ -81,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(
             content: Text('Login failed. $responseData'),
             backgroundColor: Colors.red,
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
           ),
         );
       }
@@ -97,11 +99,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Login',
               style: TextStyle(
                 fontSize: 36.0,
@@ -109,24 +111,24 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.green,
               ),
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             NeumorphicTextField(
               label: 'Username',
               icon: Icons.person,
               controller: usernameController,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             NeumorphicTextField(
               label: 'Password',
               icon: Icons.lock,
               isPassword: true,
               controller: passwordController,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Login As Lecturer',
                   style: TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
@@ -141,19 +143,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: _login,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+                foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16.0), backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                primary: Colors.green,
-                onPrimary: Colors.white,
               ),
               child: _isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
                   : const Text(
@@ -175,12 +175,12 @@ class NeumorphicTextField extends StatelessWidget {
   final TextEditingController? controller;
 
   const NeumorphicTextField({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     this.isPassword = false,
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -194,10 +194,10 @@ class NeumorphicTextField extends StatelessWidget {
         child: TextField(
           controller: controller,
           obscureText: isPassword,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
           decoration: InputDecoration(
             labelText: label,
-            labelStyle: TextStyle(color: Colors.black),
+            labelStyle: const TextStyle(color: Colors.black),
             prefixIcon: Icon(
               icon,
               color: Colors.black,

@@ -5,7 +5,7 @@ import 'dart:convert';
 class AttendancePage extends StatefulWidget {
   final Map<String, dynamic>? verifyResponse;
 
-  const AttendancePage({Key? key, this.verifyResponse}) : super(key: key);
+  const AttendancePage({super.key, this.verifyResponse});
 
   @override
   State<AttendancePage> createState() => _AttendancePageState();
@@ -77,7 +77,7 @@ class _AttendancePageState extends State<AttendancePage> {
 
         // Display an error message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Attendance marked successfully'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
@@ -88,7 +88,7 @@ class _AttendancePageState extends State<AttendancePage> {
 
         // Display an error message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Failed to mark attendance. Please try again.'),
             backgroundColor: Colors.red,
             duration: Duration(seconds: 1),
@@ -99,7 +99,7 @@ class _AttendancePageState extends State<AttendancePage> {
       print('Error: $e');
       // Display an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('An error occurred. Please try again later.'),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 2),
@@ -117,11 +117,11 @@ class _AttendancePageState extends State<AttendancePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 60,
               backgroundImage: AssetImage('lib/asset/logo.png'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Mark Attendance',
               style: TextStyle(
@@ -129,9 +129,9 @@ class _AttendancePageState extends State<AttendancePage> {
                   fontWeight: FontWeight.bold,
                   color: Colors.green[700]),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -141,16 +141,16 @@ class _AttendancePageState extends State<AttendancePage> {
                 children: [
                   Text(
                     course,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Lecturer: $lecturer',
                     style: TextStyle(fontSize: 18, color: Colors.grey[800]),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Divider(color: Colors.grey[500]),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text('Session $session',
                       style: TextStyle(
                           fontSize: 22,
@@ -159,7 +159,7 @@ class _AttendancePageState extends State<AttendancePage> {
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -177,19 +177,19 @@ class _AttendancePageState extends State<AttendancePage> {
                           });
                         },
                   style: ElevatedButton.styleFrom(
-                    primary: attendanceMarkedStart
+                    backgroundColor: attendanceMarkedStart
                         ? Colors.grey[400]
                         : Colors.grey[700],
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: _loadingStartButton
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
-                      : Text(
+                      : const Text(
                           'Start',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
@@ -208,17 +208,17 @@ class _AttendancePageState extends State<AttendancePage> {
                           });
                         },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green[500],
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    backgroundColor: Colors.green[500],
+                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: _loadingEndButton
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
-                      : Text(
+                      : const Text(
                           'End',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),

@@ -5,7 +5,7 @@ import 'dart:convert';
 class PermissionPage extends StatefulWidget {
   final Map<String, dynamic>? userData;
 
-  PermissionPage({Key? key, this.userData}) : super(key: key);
+  const PermissionPage({super.key, this.userData});
 
   @override
   _PermissionPageState createState() => _PermissionPageState();
@@ -33,11 +33,11 @@ class _PermissionPageState extends State<PermissionPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Permission Request',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               controller: verificationCodeController,
               decoration: InputDecoration(
@@ -47,7 +47,7 @@ class _PermissionPageState extends State<PermissionPage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: messageController,
               decoration: InputDecoration(
@@ -57,23 +57,23 @@ class _PermissionPageState extends State<PermissionPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Handle permission request submission
                 sendPermissionRequest();
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.green,
+                backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               child: _isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
-                  : Text(
+                  : const Text(
                       'Verify',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
@@ -108,7 +108,7 @@ class _PermissionPageState extends State<PermissionPage> {
         print('Permission request successful');
         print(responseData);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Permission sent'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
@@ -120,7 +120,7 @@ class _PermissionPageState extends State<PermissionPage> {
         // Handle other status codes or errors
         print('Permission request denied');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Failed to send permission, please try again'),
             backgroundColor: Colors.red,
             duration: Duration(seconds: 2),
@@ -132,7 +132,7 @@ class _PermissionPageState extends State<PermissionPage> {
       print('Error: $e');
       print('Permission request denied');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Network issues, check and try again'),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 2),
