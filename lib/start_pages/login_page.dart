@@ -14,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   bool isLecturer = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController referenceController = TextEditingController();
   bool _isLoading = false;
   late String uuidCode;
 
@@ -34,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         body: {
           'username': usernameController.text.trim(),
           'password': passwordController.text.trim(),
+          'reference': referenceController.text.trim(),
           'uuidcode':
               storedUUID ?? '', // Use an empty string if storedUUID is null
         },
@@ -119,6 +121,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 16.0),
             NeumorphicTextField(
+              label: 'Reference',
+              icon: Icons.person,
+              controller: referenceController,
+            ),
+            const SizedBox(height: 16.0),
+            NeumorphicTextField(
               label: 'Password',
               icon: Icons.lock,
               isPassword: true,
@@ -147,7 +155,9 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: _login,
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 16.0), backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                backgroundColor: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
