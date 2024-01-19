@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class GeneratePage extends StatefulWidget {
   @override
@@ -40,20 +41,35 @@ class _GeneratePageState extends State<GeneratePage> {
 
   // get the current location of the user
   Future<void> _determineLocation() async {
-    setState(() {
-      _isLoading = true;
-    });
-    try {
+  setState(() {
+    _isLoading = true;
+  });
+
+  try {
+    // Request location permission
+    print('Requesting location permission...');
+    PermissionStatus permissionStatus = await Permission.locationWhenInUse.request();
+    print('Permission status: $permissionStatus');
+
+    if (permissionStatus.isGranted) {
+      // Location permission is granted, proceed to get location
       Position position = await Geolocator.getCurrentPosition();
       latitude = position.latitude.toString();
       longitude = position.longitude.toString();
-    } catch (e) {
-      print('Error getting location: $e');
+    } else {
+      // Location permission is denied, handle accordingly
+      print('Location permission is denied');
+      openAppSettings();
     }
-    setState(() {
-      _isLoading = false;
-    });
+   } catch (e) {
+    print('Error getting location: $e');
+   }
+
+  setState(() {
+    _isLoading = false;
+  });
   }
+
 
   // send the location to the api for the code to be generated
   Future<void> sendLocation() async {
