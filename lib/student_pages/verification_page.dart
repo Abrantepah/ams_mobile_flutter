@@ -111,21 +111,36 @@ class _VerificationPageState extends State<VerificationPage> {
     }
   }
 
+  // get the current location of the user
   Future<void> _determinePosition() async {
-    setState(() {
-      _isLoading = true;
-    });
-    try {
+  setState(() {
+    _isLoading = true;
+  });
+
+  try {
+     LocationPermission permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+    // Permissions are denied or denied forever, let's request it!
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      print("Location permissions are still denied");
+    } else if (permission == LocationPermission.deniedForever) {
+      print("Location permissions are permanently denied");
+    } else {
+      // Permissions are granted (either can be whileInUse, always, restricted).
       Position position = await Geolocator.getCurrentPosition();
       latitude = position.latitude.toString();
       longitude = position.longitude.toString();
-      print('latitude $latitude, longitude $longitude');
-    } catch (e) {
-      print('Error getting location: $e');
+       print("Location permissions are granted after requesting");
     }
-    setState(() {
-      _isLoading = false;
-    });
+  }
+   } catch (e) {
+    print('Error getting location: $e');
+   }
+
+  setState(() {
+    _isLoading = false;
+  });
   }
 
   @override
