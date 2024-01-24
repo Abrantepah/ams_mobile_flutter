@@ -51,7 +51,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true
-  image_path: "lib/asset/lc_logo.png"
+  image_path: "lib/asset/lc_logo.jpg"
   min_sdk_android: 21
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
